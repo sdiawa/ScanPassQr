@@ -17,7 +17,8 @@ class Config {
                     port: match[4],
                     host: match[3],
                     dialectOptions: {
-                        ssl: true
+                        ssl: true,
+                        rejectUnauthorized: false
                     }
                 });
                 this.User = this.sequelize.define('user', {
