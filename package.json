@@ -4,8 +4,7 @@
   "description": "for application scanner pass qr",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "postinstall": "node index.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -16,7 +15,9 @@
   "bugs": {
     "url": "https://github.com/sdiawa/ScanPassQr/issues"
   },
-  "homepage": "https://github.com/sdiawa/ScanPassQr#readme",
+  "engines": {
+    "node": ">=14"
+  },
   "dependencies": {
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
