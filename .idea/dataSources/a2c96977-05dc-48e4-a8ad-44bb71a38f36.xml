@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.43">
     <root id="1">
       <DateStyle>dmy</DateStyle>
-      <IntrospectionStateNumber>1145</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1156</IntrospectionStateNumber>
       <ServerVersion>15.1</ServerVersion>
       <StartupTime>1669410305</StartupTime>
       <TimeZones>true ACDT
@@ -1425,9 +1425,9 @@ false posixrules
 13199||10|C|G
 13199||-9223372036854775808|U|G
 13199||10|U|G</Grants>
-      <IntrospectionStateNumber>1145</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1156</IntrospectionStateNumber>
       <ObjectId>5</ObjectId>
-      <Relations>sequence|table|16397|16398|1
+      <Relations>sequence|table|16409|16410|1
 </Relations>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4836,20 +4836,20 @@ false posixrules
     <schema id="261" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>1145</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1156</IntrospectionStateNumber>
       <ObjectId>2200</ObjectId>
       <StateNumber>517</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
     <sequence id="262" parent="261" name="users_id_seq">
       <DataType>integer|0s</DataType>
-      <ObjectId>16397</ObjectId>
-      <StateNumber>745</StateNumber>
+      <ObjectId>16409</ObjectId>
+      <StateNumber>1154</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <table id="263" parent="261" name="users">
-      <ObjectId>16398</ObjectId>
-      <StateNumber>745</StateNumber>
+      <ObjectId>16410</ObjectId>
+      <StateNumber>1154</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
@@ -4858,56 +4858,56 @@ false posixrules
       <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>745</StateNumber>
+      <StateNumber>1154</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="265" parent="263" name="qrHashCode">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>745</StateNumber>
+      <StateNumber>1154</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="266" parent="263" name="isValid">
       <DataType>boolean|0s</DataType>
       <Position>3</Position>
-      <StateNumber>745</StateNumber>
+      <StateNumber>1154</StateNumber>
       <TypeId>16</TypeId>
     </column>
     <column id="267" parent="263" name="lastCheckDate">
       <DataType>timestamp with time zone|0s</DataType>
       <Position>4</Position>
-      <StateNumber>745</StateNumber>
+      <StateNumber>1154</StateNumber>
       <TypeId>1184</TypeId>
     </column>
     <column id="268" parent="263" name="createdAt">
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
-      <StateNumber>745</StateNumber>
+      <StateNumber>1154</StateNumber>
       <TypeId>1184</TypeId>
     </column>
     <column id="269" parent="263" name="updatedAt">
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <Position>6</Position>
-      <StateNumber>745</StateNumber>
+      <StateNumber>1154</StateNumber>
       <TypeId>1184</TypeId>
     </column>
     <index id="270" parent="263" name="users_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16402</ObjectId>
+      <ObjectId>16414</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>745</StateNumber>
+      <StateNumber>1154</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
     <index id="271" parent="263" name="users_qrHashCode_key">
       <ColNames>qrHashCode</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16404</ObjectId>
-      <StateNumber>745</StateNumber>
+      <ObjectId>16416</ObjectId>
+      <StateNumber>1154</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
@@ -4916,16 +4916,16 @@ false posixrules
     </index>
     <key id="272" parent="263" name="users_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16403</ObjectId>
+      <ObjectId>16415</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>745</StateNumber>
-      <UnderlyingIndexId>16402</UnderlyingIndexId>
+      <StateNumber>1154</StateNumber>
+      <UnderlyingIndexId>16414</UnderlyingIndexId>
     </key>
     <key id="273" parent="263" name="users_qrHashCode_key">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16405</ObjectId>
-      <StateNumber>745</StateNumber>
-      <UnderlyingIndexId>16404</UnderlyingIndexId>
+      <ObjectId>16417</ObjectId>
+      <StateNumber>1154</StateNumber>
+      <UnderlyingIndexId>16416</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>

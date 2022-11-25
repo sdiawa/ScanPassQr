@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.43">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <IntrospectionStateNumber>735</IntrospectionStateNumber>
+      <IntrospectionStateNumber>737</IntrospectionStateNumber>
       <ServerVersion>15.0</ServerVersion>
       <StartupTime>1669318975</StartupTime>
       <TimeZones>true ACDT
@@ -1400,8 +1400,10 @@ false posixrules
 12998||10|C|G
 12998||-9223372036854775808|U|G
 12998||10|U|G</Grants>
-      <IntrospectionStateNumber>735</IntrospectionStateNumber>
+      <IntrospectionStateNumber>737</IntrospectionStateNumber>
       <ObjectId>16389</ObjectId>
+      <Relations>sequence|table|16394|16395|1
+</Relations>
       <OwnerName>scan_qr_bd_user</OwnerName>
     </database>
     <role id="4" parent="1" name="pg_checkpoint">
@@ -4820,10 +4822,97 @@ false posixrules
     <schema id="264" parent="3" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>735</IntrospectionStateNumber>
+      <IntrospectionStateNumber>737</IntrospectionStateNumber>
       <ObjectId>2200</ObjectId>
       <StateNumber>731</StateNumber>
       <OwnerName>scan_qr_bd_user</OwnerName>
     </schema>
+    <sequence id="265" parent="264" name="users_id_seq">
+      <DataType>integer|0s</DataType>
+      <ObjectId>16394</ObjectId>
+      <Outdated>1</Outdated>
+      <StateNumber>736</StateNumber>
+      <OwnerName>scan_qr_bd_user</OwnerName>
+    </sequence>
+    <table id="266" parent="264" name="users">
+      <ObjectId>16395</ObjectId>
+      <StateNumber>736</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>scan_qr_bd_user</OwnerName>
+    </table>
+    <column id="267" parent="266" name="id">
+      <DataType>integer|0s</DataType>
+      <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>736</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="268" parent="266" name="qrHashCode">
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>736</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="269" parent="266" name="isValid">
+      <DataType>boolean|0s</DataType>
+      <Position>3</Position>
+      <StateNumber>736</StateNumber>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="270" parent="266" name="lastCheckDate">
+      <DataType>timestamp with time zone|0s</DataType>
+      <Position>4</Position>
+      <StateNumber>736</StateNumber>
+      <TypeId>1184</TypeId>
+    </column>
+    <column id="271" parent="266" name="createdAt">
+      <DataType>timestamp with time zone|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StateNumber>736</StateNumber>
+      <TypeId>1184</TypeId>
+    </column>
+    <column id="272" parent="266" name="updatedAt">
+      <DataType>timestamp with time zone|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+      <StateNumber>736</StateNumber>
+      <TypeId>1184</TypeId>
+    </column>
+    <index id="273" parent="266" name="users_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16399</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>736</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <index id="274" parent="266" name="users_qrHashCode_key">
+      <ColNames>qrHashCode</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16401</ObjectId>
+      <StateNumber>736</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationNames>default</CollationNames>
+      <CollationIds>100</CollationIds>
+      <CollationParentNames>pg_catalog</CollationParentNames>
+    </index>
+    <key id="275" parent="266" name="users_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16400</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>736</StateNumber>
+      <UnderlyingIndexId>16399</UnderlyingIndexId>
+    </key>
+    <key id="276" parent="266" name="users_qrHashCode_key">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16402</ObjectId>
+      <StateNumber>736</StateNumber>
+      <UnderlyingIndexId>16401</UnderlyingIndexId>
+    </key>
   </database-model>
 </dataSource>

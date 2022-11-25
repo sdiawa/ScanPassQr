@@ -40,7 +40,7 @@ class Config {
                 });
                 (async () => {
                     console.log('Connecting to DB...');
-                    await this.User.sync({force: true,logging: console.log})
+                    await this.User.sync({logging: console.log})
                 })();
             } else {
                 console.error("Impossible de trouver la clé privée du token dans l'env TOKEN_KEY.");
@@ -96,24 +96,25 @@ class Config {
      * @return {Promise<T>|null|boolean}
      */
     generate200Users = async () => {
-        let user = {qrHashCode: null, isValid: false, lastCheckDate: null};
         if (this.User === undefined)
             return false;
-        let newUser = await this.User.findAndCountAll().catch(() => {
-            return false
-        });
-        if (newUser && newUser > 0)
+        let newUser = await this.User.findAndCountAll()
+        if (newUser && newUser.count > 0)
             return false;
-        const passPhrase = "DSK is the best"
-        for (let i = 1; i < 200; i++) {
+        const passPhrase = "DSK is the best";
+        let users = [];
+        for (let i = 1; i <= 200; i++) {
+            let user = {id: null, qrHashCode: null, isValid: true, lastCheckDate: null};
             const genPass = await this.hashPassword(passPhrase + i);
             if (genPass === null)
                 return false;
+            user.id = i;
             user.qrHashCode = genPass;
-            this.User.create(user).catch(() => {
-                return false;
-            });
+            users.push(user)
         }
+        this.User.bulkCreate(users).catch(() => {
+            return false;
+        });
         return true;
     };
 }
