@@ -1,6 +1,5 @@
-const Sequelize = require('sequelize');
 const bCrypt = require("bcrypt");
-const {DataTypes} = require("sequelize");
+const {DataTypes, Sequelize} = require("sequelize");
 
 // connection à la BD
 class Config {
@@ -11,15 +10,24 @@ class Config {
         if (process.env.DATABASE_URL) {
             if (process.env.TOKEN_KEY) {
                 let match = process.env.DATABASE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/);
+
                 this.sequelize = new Sequelize(match[5], match[1], match[2], {
-                    dialect: 'postgres',
-                    protocol: 'postgres',
+                    logging: console.log,
                     port: match[4],
                     host: match[3],
+                    pool: {
+                        max: 1,
+                        min: 0,
+                        acquire: 30000,
+                        idle: 10000
+                    },
+                    dialect: "postgres",
                     dialectOptions: {
-                        ssl: true,
-                        rejectUnauthorized: false
-                    }
+                        ssl: {
+                            require: true,
+                            rejectUnauthorized: false // <<<<<<< YOU NEED THIS
+                        }
+                    },
                 });
                 this.User = this.sequelize.define('user', {
                     qrHashCode: {
@@ -31,7 +39,8 @@ class Config {
                     lastCheckDate: DataTypes.DATE
                 });
                 (async () => {
-                    await this.User.sync({logging: false})
+                    console.log('Connecting to DB...');
+                    await this.User.sync({force: true,logging: console.log})
                 })();
             } else {
                 console.error("Impossible de trouver la clé privée du token dans l'env TOKEN_KEY.");
