@@ -1,5 +1,7 @@
 const bCrypt = require("bcrypt");
 const {DataTypes, Sequelize} = require("sequelize");
+const axios = require("axios");
+const fs = require("fs");
 
 // connection à la BD
 class Config {
@@ -86,7 +88,6 @@ class Config {
             return user;
         }
         return false;
-
     };
 
 
@@ -110,13 +111,48 @@ class Config {
                 return false;
             user.id = i;
             user.qrHashCode = genPass;
-            users.push(user)
+            users.push(user);
+            await axios.get('https://api.qrserver.com/v1/create-qr-code/',
+                {
+                    params: {
+                        size : '1000x1000',
+                        data: genPass
+                    },
+                    responseType: 'stream'
+                }
+            ).then(async response =>
+                await new Promise((resolve, reject) => {
+                    response.data
+                        .pipe(fs.createWriteStream('generated/' + i + '.png'))
+                        .on('finish', () => resolve())
+                        .on('error', e => reject(e));
+                }));
         }
         this.User.bulkCreate(users).catch(() => {
             return false;
         });
         return true;
     };
+
+    /**
+     *
+     * @desc Valider un qrCode par le hash
+     * @param qrHash
+     * @return {Promise<T>|null|boolean}
+     */
+    validateQrHash = async (qrHash) => {
+        if (this.User === undefined)
+            return null;
+        let user = await this.User.findOne({where: {qrHashCode: qrHash}}).catch(() => {
+            return null;
+        });
+        if (user) {
+            user.isValid = false;
+            user.lastCheckDate = new Date().toUTCString();
+           return  await user.save().then(value => {return true}).catch(reason => { return false});
+        }
+        return false;
+    }
 }
 
 const Bd = new Config();

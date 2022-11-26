@@ -33,4 +33,20 @@ app.get('/api/check', async function (req, res) {
     } else
         return res.status(400).send();
 });
+
+app.post('/api/validate', async function (req, res) {
+    if (req.query.qrHashCode) {
+        const validated = await Bd.validateQrHash(req.query.qrHashCode);
+        if (validated === null)
+            return res.status(400).send();
+        if (validated)
+            return res.status(200).send(
+                {
+                    is_validated: true,
+                });
+        return res.status(409).send();
+    } else
+        return res.status(400).send();
+});
+
 module.exports = app;
