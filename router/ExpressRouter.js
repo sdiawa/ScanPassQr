@@ -35,8 +35,8 @@ app.get('/api/check', async function (req, res) {
 });
 
 app.post('/api/validate', async function (req, res) {
-    if (req.query.qrHashCode) {
-        const validated = await Bd.validateQrHash(req.query.qrHashCode);
+    if (req.body && req.body.qrHashCode) {
+        const validated = await Bd.validateQrHash(req.body.qrHashCode);
         if (validated === null)
             return res.status(400).send();
         if (validated)
